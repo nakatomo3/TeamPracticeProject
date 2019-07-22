@@ -1,0 +1,6 @@
+﻿速度の上がる間隔→SpeedManager：ADD_SPEED_INTERVAL
+
+車の種類→CarGenerator：cars
+車種それぞれの出現確率→CarGenerator：plobabiloties
+最低限の速度→CarGenerator：BASE_SPEED
+
