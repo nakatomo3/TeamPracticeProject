@@ -1,0 +1,21 @@
+@startuml
+title スタート時シーケンス図
+
+StartAnimation->StartAnimation : Animation()
+StartAnimation->GameManager : StartRunning()
+StartAnimation->StartAnimation : Destroy()
+
+newpage ゲーム中シーケンス図
+GameManager->Player : if(GetRunning() == true){ \n    MoveHorizontal()\n}
+SpeedManager<-GameManager : GetSpeed()
+GameManager->GameManager : 一定時間ごと\nGenerateWhiteLine()
+GameManager->GameManager : 一定時間ごと\nGenerateSideImageLine()
+CarGenerator->CarGenerator : void GenerateCar()
+SpeedManager<-CarGenerator : GetSpeed()
+SpeedManager->SpeedManager : 一定時間ごと\nAddSpeed()
+
+newpage ゲームオーバー
+
+newpage リザルト
+
+@enduml

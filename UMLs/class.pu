@@ -1,0 +1,189 @@
+@startuml
+title ゲーム部分クラス図
+
+class Sample{
+    + public
+    # protected
+    - private
+    + public()
+    # protected()
+    - private()
+}
+
+class PlayerPrefs {
+    - key int "isGyroMode"
+    - key int "score"
+    - key int "highScore"
+    - key float "speed"
+    - key string "scores"
+}
+
+package Game <<Frame>>{
+
+    package Singleton <<Frame>>{
+        class SystemManager << (S,#FF7700)>>{
+            - int difficultyRank
+            - bool isRunning
+            - float whiteLineTimer
+            - float SideImageTimer
+            + Sprite[] SideImages
+            - int sideImageNum
+            + bool GetRunning()
+            + int GetDifficultyRank()
+            + void StopRunning()
+            + void StartRunning()
+            - void GenerateWhiteLine()
+            - void GenerateSideImage()
+        }
+
+        class ScoreManager << (S,#FF7700)>>{
+            + Text scoreText
+            + Text highScoreText
+            - int score
+            - int highScore
+            + void AddScore(int value)
+            - void ChangeScoreText()
+        }
+
+        class SpeedManager << (S,#FF7700)>>{
+            + Text speedText
+            - float speed
+            - float addSpeedTimer
+            - const float ADD_SPEED_INTERVAL
+            - void AddSpeed()
+        }
+
+        class CarGenerator << (S,#FF7700)>>{
+            + GameObject[] cars
+            - bool[] hasEnemyLanes
+            - float[,] plobabiloties
+            - float baseSpeed
+            - void GenerateCar()
+        }
+
+        class OptionManager << (S,#FF7700)>>{
+            - bool isGyroMode
+            - void ChangeGyroMode()
+            + bool GetIsGyro()
+        }
+
+        class CollisionChecker << (S,#FF7700)>>{
+            - GameOverMode gameOverMode
+            - void Impact(Car car)
+        }
+
+    }
+
+    package Car <<Frame>>{
+        class Car{
+            # float verticalSpeed
+            # int Score
+            + void ChangeSpeed()
+            + int GetScore()
+            # void MoveVertical()
+            # void AutoDestroy()
+        }
+
+        class NormalCar{
+            + tag NormalCar
+            - int thisScore
+            + void Impact(Vector3 vector)
+        }
+
+        class CarA{
+    
+        }
+        class CarB{
+    
+        }
+
+        class Enemy{
+            + tag Enemy
+        }
+
+        class Truck{
+
+        }
+        class PoliceCar{
+
+        }
+
+        class Rival{
+            - float horizontalSpeed
+            - void Move()
+        }
+
+        class Player{
+            - float horizontalSpeed
+            - float rotation
+            - const float UP_MAX
+            - const float DOWN_MAX
+            - const float LEFT_MAX
+            - const float RIGHT_MAX
+            - void MoveHorizontal()
+            - void AddScore()
+        }
+    }
+
+
+    package Animation <<Frame>>{
+
+        class Animation{
+            # float DESTROY_INTERVAL
+            # void Animation()
+        }
+
+        class StartAnimation {
+            - float animationTimer
+            - const float ANIMATION_TIMER_MAX
+        }
+
+        class ScoreAnimation{
+            - void Move()
+        }
+
+        class BombAnimation{
+        
+        }
+        class SmokeAnimation{
+        
+        }
+
+        class FadeIn{
+        
+        }
+    }
+
+    class WhiteLine{
+        - Move()
+    }
+
+    class SideImage{
+        - Move()
+    }
+
+
+    Car<|-- Player
+    Car<|-- NormalCar
+    NormalCar<|--CarA
+    NormalCar<|--CarB
+    Car<|-- Enemy
+
+    Enemy<|-- Truck
+    Enemy<|-- PoliceCar
+    Enemy<|-- Rival
+
+    Animation<|--ScoreAnimation
+    Animation<|--BombAnimation
+    Animation<|--SmokeAnimation
+    Animation<|--FadeIn
+    Animation<|--StartAnimation
+}
+
+package Result <<Frame>>{
+    
+}
+
+
+
+@enduml
