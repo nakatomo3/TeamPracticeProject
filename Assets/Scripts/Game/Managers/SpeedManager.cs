@@ -25,21 +25,29 @@ public class SpeedManager : MonoBehaviour {
 	private const float ADD_SPEED_INTERVAL = 2.0f;
 
 
+    private float timeCounter;
+
 	// Start is called before the first frame update
 	void Start() {
+        timeCounter = 0;
 
-	}
+    }
 
 	// Update is called once per frame
 	void Update() {
-
+        timeCounter += Time.deltaTime;
+        if (timeCounter >= ADD_SPEED_INTERVAL) {
+            AddSpeed();
+            timeCounter = 0;
+        }
+        speedText.text = speed.ToString("000");
 	}
 
 	/// <summary>
 	/// ADD_SPEED_INTERVALごとにspeedを+1していく
 	/// </summary>
 	private void AddSpeed() {
-
+        speed++;
 	}
 
 	/// <summary>
