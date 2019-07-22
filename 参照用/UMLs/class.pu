@@ -51,13 +51,14 @@ package Game <<Frame>>{
             - float addSpeedTimer
             - const float ADD_SPEED_INTERVAL
             - void AddSpeed()
+            + float GetSpeed()
         }
 
         class CarGenerator << (S,#FF7700)>>{
             + GameObject[] cars
             - bool[] hasEnemyLanes
             - float[,] plobabiloties
-            - float baseSpeed
+            - float BASE_SPEEDs
             - void GenerateCar()
         }
 
@@ -77,7 +78,7 @@ package Game <<Frame>>{
     package Car <<Frame>>{
         class Car{
             # float verticalSpeed
-            # int Score
+            # int SCORE
             + void ChangeSpeed()
             + int GetScore()
             # void MoveVertical()
@@ -116,6 +117,8 @@ package Game <<Frame>>{
         class Player{
             - float horizontalSpeed
             - float rotation
+            - float horizontalInertia
+            - float verticalInertia
             - const float UP_MAX
             - const float DOWN_MAX
             - const float LEFT_MAX
@@ -128,7 +131,7 @@ package Game <<Frame>>{
 
     package Animation <<Frame>>{
 
-        class Animation{
+        class BaseAnimation{
             # float DESTROY_INTERVAL
             # void Animation()
         }
@@ -154,12 +157,19 @@ package Game <<Frame>>{
         }
     }
 
-    class WhiteLine{
-        - Move()
+    class Road{
+        - float speed
+        - void Move()
+        + void ChangeSpeed(float speed)
+        - void AutoDestroy()
     }
 
     class SideImage{
-        - Move()
+        - float speed
+        - void Move()
+        + void ChangeSpeed(float speed)
+        + void ChangeImage(Sprite sprite)
+        - void AutoDestroy()
     }
 
 
@@ -173,11 +183,12 @@ package Game <<Frame>>{
     Enemy<|-- PoliceCar
     Enemy<|-- Rival
 
-    Animation<|--ScoreAnimation
-    Animation<|--BombAnimation
-    Animation<|--SmokeAnimation
-    Animation<|--FadeIn
-    Animation<|--StartAnimation
+    BaseAnimation<|--ScoreAnimation
+    BaseAnimation<|--BombAnimation
+    BaseAnimation<|--SmokeAnimation
+    BaseAnimation<|--FadeIn
+    BaseAnimation<|--StartAnimation
+
 }
 
 package Result <<Frame>>{

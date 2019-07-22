@@ -10,8 +10,8 @@ GameManager->Player : if(GetRunning() == true){ \n    MoveHorizontal()\n}
 SpeedManager<-GameManager : GetSpeed()
 GameManager->GameManager : 一定時間ごと\nGenerateWhiteLine()
 GameManager->GameManager : 一定時間ごと\nGenerateSideImageLine()
-CarGenerator->CarGenerator : void GenerateCar()
 SpeedManager<-CarGenerator : GetSpeed()
+CarGenerator->CarGenerator : void GenerateCar()
 SpeedManager->SpeedManager : 一定時間ごと\nAddSpeed()
 
 newpage ゲームオーバー
