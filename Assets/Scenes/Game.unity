@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -371,7 +371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -371.99997, y: 212.99995}
+  m_AnchoredPosition: {x: -371.99997, y: 253}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &598203407
@@ -407,14 +407,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd27601193f74043b5ee225900d2526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WhiteLine: {fileID: 1510146755359971346, guid: 4a4c6f6931113a749816db3b7089aa86,
+  roadPrefab: {fileID: 1510146755359971346, guid: 4a4c6f6931113a749816db3b7089aa86,
     type: 3}
   SideImages:
   - {fileID: 21300000, guid: 3c093ff6560ea684cbf204fcd1e0380f, type: 3}
   - {fileID: 21300000, guid: 22bbe729d96069d40aef34ea3ba37c03, type: 3}
   - {fileID: 21300000, guid: 3294ef29d54b7714d90a723a3c372b07, type: 3}
   - {fileID: 21300000, guid: e5e2ff3bf8143d5489a607965521098a, type: 3}
-  readPrefab: {fileID: 4559692894689725724, guid: 81947cae27076e94b8ec5554fef46624,
+  sideImagePrefab: {fileID: 4559692894689725724, guid: 81947cae27076e94b8ec5554fef46624,
     type: 3}
   BackGroundCanvas: {fileID: 1081673585}
 --- !u!114 &598203409
@@ -765,7 +765,7 @@ RectTransform:
   m_GameObject: {fileID: 1102121196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 17.97115, y: 17.97115, z: 17.97115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 553859034}
   m_RootOrder: 1
@@ -773,7 +773,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 646, y: -830}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1700, y: 850}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1102121198
 MonoBehaviour:
@@ -913,7 +913,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -9, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1424367025

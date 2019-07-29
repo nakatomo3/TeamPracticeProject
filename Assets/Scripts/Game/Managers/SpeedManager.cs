@@ -15,15 +15,18 @@ public class SpeedManager : MonoBehaviour {
 	/// <summary>
 	/// 現在のスピード(拡張性を考えて一応float)
 	/// </summary>
-	private float speed=0;
+	private float speed = 0;
 
 	/// <summary>
 	/// スピードの
 	/// </summary>
  	private float addSpeedTimer;
 
-	private const float ADD_SPEED_INTERVAL = 2.0f;
+	public const float ADD_SPEED_INTERVAL = 2.0f;
 
+	private void Awake() {
+		instance = this;		
+	}
 
 	// Start is called before the first frame update
 	void Start() {
