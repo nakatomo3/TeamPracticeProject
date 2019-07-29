@@ -4,3 +4,8 @@
 車種それぞれの出現確率→CarGenerator：plobabiloties
 最低限の速度→CarGenerator：BASE_SPEED
 
+道の最低速度→Road：DEFAULT_SPPED
+道の100km当たりの実際の速度→Road：SCROLL_SPEED
+
+背景の最低速度→：BackGroundImage：DEFAULT_SPPED
+背景の100km当たりの実際の速度→BackGroundImage：SCROLL_SPEED

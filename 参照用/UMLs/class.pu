@@ -26,6 +26,7 @@ package Game <<Frame>>{
             - bool isRunning
             - float whiteLineTimer
             - float SideImageTimer
+            - float whiteLineInterval
             + Sprite[] SideImages
             - int sideImageNum
             + bool GetRunning()
@@ -47,9 +48,9 @@ package Game <<Frame>>{
 
         class SpeedManager << (S,#FF7700)>>{
             + Text speedText
-            - float speed
+            + const float ADD_SPEED_INTERVAL
             - float addSpeedTimer
-            - const float ADD_SPEED_INTERVAL
+            - float roadSpeed
             - void AddSpeed()
             + float GetSpeed()
         }
@@ -160,6 +161,7 @@ package Game <<Frame>>{
     class Road{
         - float speed
         - void Move()
+        - const float 
         + void ChangeSpeed(float speed)
         - void AutoDestroy()
     }

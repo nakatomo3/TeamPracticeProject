@@ -22,21 +22,21 @@ public class SystemManager : MonoBehaviour {
     /// インターバルはSpeedManagerのGetSpeedからの値を計算によって算出する
     /// </summary>
     private float whiteLineTimer;
-    public GameObject WhiteLine;
-    private float WHITE_LINE_GENERATE_INTERVAL = 10;
+    public GameObject roadPrefab;
+    private float whiteLineInterval = 10;
 
     /// <summary>
     /// 左右背景の画像を出すためのタイマー。
     /// インターバルはSpeedManagerのGetSpeedからの値を計算によって算出する
     /// </summary>
-	private float SideImageTimer;
-    private float SIDE_IMAGE_GENERATE_INTERVAL = 16.5f;
+	private float sideImageTimer;
+    private float sideImageInterval = 16.5f;
 
     /// <summary>
     /// 左右背景の画像の一覧
     /// </summary>
     public Sprite[] SideImages;
-    public GameObject readPrefab;
+	public GameObject sideImagePrefab;
     public GameObject BackGroundCanvas;
 
     /// <summary>
@@ -44,32 +44,40 @@ public class SystemManager : MonoBehaviour {
     /// </summary>
     private int sideImageNum;
 
+	/// <summary>
+	/// 道の速度
+	/// </summary>
+	private float roadSpeed;
+
     private void Awake() {
         instance = this;
     }
 
     // Start is called before the first frame update
     void Start() {
-        whiteLineTimer = WHITE_LINE_GENERATE_INTERVAL;
-        SideImageTimer = SIDE_IMAGE_GENERATE_INTERVAL;
-        sideImageNum = Random.RandomRange(0, 4);
-        readPrefab.GetComponent<Image>().sprite = SideImages[sideImageNum];
+        whiteLineTimer = whiteLineInterval;
+        sideImageTimer = sideImageInterval;
+        sideImageNum = Random.Range(0, 4);
+		//roadPrefab.GetComponent<Image>().sprite = SideImages[sideImageNum];
 
-        //道路の生成
-        Instantiate(WhiteLine, new Vector3(0, 0, -30), Quaternion.identity);
+		//道路の生成
+		var newRoad = Instantiate(roadPrefab, new Vector3(0, 0, -30), Quaternion.identity);
+		newRoad.transform.parent = BackGroundCanvas.transform;
 
-        //背景の生成
-        readPrefab = Instantiate(readPrefab, new Vector3(0, -9, -46.5f), Quaternion.Euler(90, 0, 0));
-        readPrefab.transform.parent = BackGroundCanvas.transform;
+		//背景の生成
+		var newSide = Instantiate(sideImagePrefab, new Vector3(0, -9, -46.5f), Quaternion.Euler(90, 0, 0));
+		newSide.GetComponent<Image>().sprite = SideImages[sideImageNum];
+		newSide.transform.parent = BackGroundCanvas.transform;
 
-    }
+	}
 
     // Update is called once per frame
     void Update() {
         GenerateWhiteLine();
         GenerateSideImage();
 
-    }
+		roadSpeed = Road.DEFAULT_SPPED + Road.SCROLL_SPEED * (SpeedManager.instance.GetSpeed() / 100);
+	}
 
     /// <summary>
     /// 今走っているのかを取得する
@@ -107,24 +115,28 @@ public class SystemManager : MonoBehaviour {
     private void GenerateWhiteLine() {
         if (GetRunning() == false) {
             whiteLineTimer += Time.deltaTime;
-            if (whiteLineTimer >= WHITE_LINE_GENERATE_INTERVAL) {
-                Instantiate(WhiteLine, new Vector3(0, 0, 20), Quaternion.identity);
+            if (whiteLineTimer >= whiteLineInterval) {
+                var newRoad = Instantiate(roadPrefab, new Vector3(0, 0, 20), Quaternion.identity);
+				newRoad.transform.parent = BackGroundCanvas.transform;
                 whiteLineTimer = 0;
             }
+			whiteLineInterval = 50.0f / roadSpeed;
         }
     }
 
     /// <summary>
-    /// Updateで呼び出される。SideImageTimerをもとに左右背景を生成していく
+    /// Updateで呼び出される。sideImageTimerをもとに左右背景を生成していく
     /// </summary>
     private void GenerateSideImage() {
         if (GetRunning() == false) {
-            SideImageTimer += Time.deltaTime;
-            if (SideImageTimer >= SIDE_IMAGE_GENERATE_INTERVAL) {
-                readPrefab = Instantiate(readPrefab, new Vector3(0, -9, -5), Quaternion.Euler(90, 0, 0));
-                readPrefab.transform.parent = BackGroundCanvas.transform;
-                SideImageTimer = 0;
+            sideImageTimer += Time.deltaTime;
+            if (sideImageTimer >= sideImageInterval) {
+                var newSide = Instantiate(sideImagePrefab, new Vector3(0, -9, -5), Quaternion.Euler(90, 0, 0));
+				newSide.GetComponent<Image>().sprite = SideImages[sideImageNum];
+                newSide.transform.parent = BackGroundCanvas.transform;
+                sideImageTimer = 0;
             }
+			
 
         }
     }
