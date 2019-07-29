@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Road : MonoBehaviour {
     private Transform thisTransform;
+
     private float destroyCounter = 0;
+	private const float DESTROY_INTERVAL = 20;
 
 	/// <summary>
 	/// 100kmあたりの実際の速度
@@ -33,7 +35,7 @@ public class Road : MonoBehaviour {
             thisTransform.Translate(0, 0, -speed * Time.deltaTime);
 
             destroyCounter += Time.deltaTime;
-            if (destroyCounter >= 20) {
+            if (destroyCounter >= DESTROY_INTERVAL) {
                 Destroy(this.gameObject);
             }
         }
