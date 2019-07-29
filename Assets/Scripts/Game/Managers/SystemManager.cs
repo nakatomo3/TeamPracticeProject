@@ -37,7 +37,7 @@ public class SystemManager : MonoBehaviour {
     /// </summary>
     public Sprite[] SideImages;
 	public GameObject sideImagePrefab;
-    public GameObject BackGroundCanvas;
+    public GameObject backGroundCanvas;
 
     /// <summary>
     /// このゲームで使う左右背景のナンバーを記録しておくもの。Startでランダムに決定する
@@ -62,12 +62,12 @@ public class SystemManager : MonoBehaviour {
 
 		//道路の生成
 		var newRoad = Instantiate(roadPrefab, new Vector3(0, 0, -30), Quaternion.identity);
-		newRoad.transform.parent = BackGroundCanvas.transform;
+		newRoad.transform.parent = backGroundCanvas.transform;
 
 		//背景の生成
 		var newSide = Instantiate(sideImagePrefab, new Vector3(0, -9, -46.5f), Quaternion.Euler(90, 0, 0));
 		newSide.GetComponent<Image>().sprite = SideImages[sideImageNum];
-		newSide.transform.parent = BackGroundCanvas.transform;
+		newSide.transform.parent = backGroundCanvas.transform;
 
 	}
 
@@ -117,7 +117,7 @@ public class SystemManager : MonoBehaviour {
             whiteLineTimer += Time.deltaTime;
             if (whiteLineTimer >= whiteLineInterval) {
                 var newRoad = Instantiate(roadPrefab, new Vector3(0, 0, 20), Quaternion.identity);
-				newRoad.transform.parent = BackGroundCanvas.transform;
+				newRoad.transform.parent = backGroundCanvas.transform;
                 whiteLineTimer = 0;
             }
 			whiteLineInterval = 50.0f / roadSpeed;
@@ -133,7 +133,7 @@ public class SystemManager : MonoBehaviour {
             if (sideImageTimer >= sideImageInterval) {
                 var newSide = Instantiate(sideImagePrefab, new Vector3(0, -9, -5), Quaternion.Euler(90, 0, 0));
 				newSide.GetComponent<Image>().sprite = SideImages[sideImageNum];
-                newSide.transform.parent = BackGroundCanvas.transform;
+                newSide.transform.parent = backGroundCanvas.transform;
                 sideImageTimer = 0;
             }
 			

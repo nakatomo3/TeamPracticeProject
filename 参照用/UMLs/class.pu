@@ -25,10 +25,15 @@ package Game <<Frame>>{
             - int difficultyRank
             - bool isRunning
             - float whiteLineTimer
-            - float SideImageTimer
+            + GameObject roadPrefab
             - float whiteLineInterval
+            - float sideImageTimer
+            - float sideImageInterval
             + Sprite[] SideImages
+            + GameObject sideImagePrefab
+            + GameObject backGroundCanvas
             - int sideImageNum
+            - float roadSpeed
             + bool GetRunning()
             + int GetDifficultyRank()
             + void StopRunning()
@@ -49,6 +54,7 @@ package Game <<Frame>>{
         class SpeedManager << (S,#FF7700)>>{
             + Text speedText
             + const float ADD_SPEED_INTERVAL
+            - float speed
             - float addSpeedTimer
             - float roadSpeed
             - void AddSpeed()
@@ -159,19 +165,24 @@ package Game <<Frame>>{
     }
 
     class Road{
+        - float destroyTimer
+        - const float DESTROY_INTERVAL
         - float speed
+        + const float SCROLL_SPEED
+        + const float DEFAULT_SPPED
         - void Move()
-        - const float 
         + void ChangeSpeed(float speed)
-        - void AutoDestroy()
     }
 
-    class SideImage{
+    class BackGroundImage{
+        - float destroyTimer
+        - const float DESTROY_INTERVAL
         - float speed
+        + const float SCROLL_SPEED
+        + const float DEFAULT_SPPED
         - void Move()
         + void ChangeSpeed(float speed)
         + void ChangeImage(Sprite sprite)
-        - void AutoDestroy()
     }
 
 
