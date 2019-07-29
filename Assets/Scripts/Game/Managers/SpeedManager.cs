@@ -15,7 +15,7 @@ public class SpeedManager : MonoBehaviour {
 	/// <summary>
 	/// 現在のスピード(拡張性を考えて一応float)
 	/// </summary>
-	private float speed;
+	private float speed=0;
 
 	/// <summary>
 	/// スピードの
@@ -27,19 +27,27 @@ public class SpeedManager : MonoBehaviour {
 
 	// Start is called before the first frame update
 	void Start() {
+        addSpeedTimer = 0;
 
-	}
+    }
 
 	// Update is called once per frame
 	void Update() {
-
+        if (SystemManager.instance.GetRunning() == false) {
+            addSpeedTimer += Time.deltaTime;
+            if (addSpeedTimer >= ADD_SPEED_INTERVAL) {
+                AddSpeed();
+                addSpeedTimer = 0;
+            }
+            speedText.text = speed.ToString("000");
+        }
 	}
 
 	/// <summary>
 	/// ADD_SPEED_INTERVALごとにspeedを+1していく
 	/// </summary>
 	private void AddSpeed() {
-
+        speed++;
 	}
 
 	/// <summary>
