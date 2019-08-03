@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalCar : MonoBehaviour
-{
+public class NormalCar : Car {
+    private int thisScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +14,9 @@ public class NormalCar : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void Impact(Vector3 vector) {
+
     }
 }
