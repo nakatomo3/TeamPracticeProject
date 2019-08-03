@@ -16,8 +16,8 @@ public class CarGenerator : MonoBehaviour {
     };
     enum Cars {
         Car20,
+        Car50
     }
-    private Car[] carScript;
     private List<GameObject> generateCars=new List<GameObject>();   //生成した車のpositionを参照
     private List<int> generateCarID = new List<int>();              //どの車線で生成したか番号を入れる
     private float generateTimer = 0;
@@ -37,9 +37,7 @@ public class CarGenerator : MonoBehaviour {
     void Start() {
         //-----------------変数の初期化
         hasEnemyLanes = new bool[(int)Lanes.LaneMax];
-        BASE_SPEEDs = new float[cars.GetLength(0)];
         plobabiloties = new float[(int)Lanes.LaneMax, cars.GetLength(0)];
-        carScript = new Car[cars.GetLength(0)];
         for (int i = 0; i < (int)Lanes.LaneMax; i++) {
             hasEnemyLanes[i] = false ;
         }
@@ -48,13 +46,11 @@ public class CarGenerator : MonoBehaviour {
 
         //車ごとの初期確率を入れる
         for (int i=0; i < (int)Lanes.LaneMax; i++) {
-            plobabiloties[i,(int)Cars.Car20] = 80.0f-i*10;
+            plobabiloties[i,(int)Cars.Car20] = 80.0f-i*5;
+            plobabiloties[i, (int)Cars.Car50] = 70.0f - i * 5;
         }
-        //車ごとのスピードを入れる
-        BASE_SPEEDs[(int)Cars.Car20] = 3;
+ 
 
-        //車ごとのスクリプトを入れる
-        carScript[0] = cars[0].GetComponent<Car20>();
     }
 
     // Update is called once per frame
@@ -66,8 +62,9 @@ public class CarGenerator : MonoBehaviour {
         }
 
         //車ごとの生成確率を難易度に合わせて変える
-        //for (int i = (int)Lanes.LaneMax - 1; i >= 0; i++) {
-        //    plobabiloties[i, (int)Cars.Car20] -= 8 + SystemManager.instance.GetDifficultyRank() * 2;
+        //for (int i = 0; i < (int)Lanes.LaneMax; i++) {
+        //    plobabiloties[i, (int)Cars.Car20] = -15 *SystemManager.instance.GetDifficultyRank() + 80-i*5;
+        //     plobabiloties[i, (int)Cars.Car50] = -8 * ((SystemManager.instance.GetDifficultyRank() - 1)*(SystemManager.instance.GetDifficultyRank() - 1)) + 80)-i*5;
 
         //}
 
@@ -112,7 +109,6 @@ public class CarGenerator : MonoBehaviour {
                     if (plobabiloties[(int)Lanes.Lane1, generateCarNum] >= Random.Range(0.0f, 100.0f)) {            //plobabilotiesの確率をもとに生成するか判定
                         generateCars.Add(Instantiate(cars[generateCarNum], new Vector3(GENERATE_POS_X[(int)Lanes.Lane1], 1.0f, -45), Quaternion.Euler(0, 0, 0)) as GameObject);  //車の生成とリストに生成した車を入れる
                         generateCarID.Add((int)Lanes.Lane1);                                                                                                                     //どのレーンに生成したか判別するために番号を入れる
-                        carScript[generateCarNum].ChangeSpeed(BASE_SPEEDs[generateCarNum]); 
                         hasEnemyLanes[(int)Lanes.Lane1] = true;
                     }
                     break;
@@ -121,7 +117,6 @@ public class CarGenerator : MonoBehaviour {
                     if (plobabiloties[(int)Lanes.Lane2, generateCarNum] >= Random.Range(0.0f, 100.0f)) {
                         generateCars.Add(Instantiate(cars[generateCarNum], new Vector3(GENERATE_POS_X[(int)Lanes.Lane2], 1.0f, -45), Quaternion.Euler(0, 0, 0)) as GameObject);
                         generateCarID.Add((int)Lanes.Lane2);
-                        carScript[generateCarNum].ChangeSpeed(BASE_SPEEDs[generateCarNum]);
                         hasEnemyLanes[(int)Lanes.Lane2] = true;
                     }
                     break;
@@ -130,7 +125,6 @@ public class CarGenerator : MonoBehaviour {
                     if (plobabiloties[(int)Lanes.Lane3, generateCarNum] >= Random.Range(0.0f, 100.0f)) {
                         generateCars.Add(Instantiate(cars[generateCarNum], new Vector3(GENERATE_POS_X[(int)Lanes.Lane3], 1.0f, -20), Quaternion.Euler(0, 180, 0)) as GameObject);
                         generateCarID.Add((int)Lanes.Lane3);
-                        carScript[generateCarNum].ChangeSpeed(BASE_SPEEDs[generateCarNum]);
                         hasEnemyLanes[(int)Lanes.Lane3] = true;
                     }
                     break;
@@ -139,7 +133,6 @@ public class CarGenerator : MonoBehaviour {
                     if (plobabiloties[(int)Lanes.Lane4, generateCarNum] >= Random.Range(0.0f, 100.0f)) {
                         generateCars.Add(Instantiate(cars[generateCarNum], new Vector3(GENERATE_POS_X[(int)Lanes.Lane4], 1.0f, -20), Quaternion.Euler(0, 180, 0)) as GameObject);
                         generateCarID.Add((int)Lanes.Lane4);
-                        carScript[generateCarNum].ChangeSpeed(BASE_SPEEDs[generateCarNum]);
                         hasEnemyLanes[(int)Lanes.Lane4] = true;
                     }
                     break;

@@ -6,11 +6,11 @@ public class Car20 : NormalCar {
 
 
     // Start is called before the first frame update
-    override protected void Start()
+    void Start()
     {
         
         SCORE = 20;
-       
+        ChangeSpeed(3);
     }
 
     // Update is called once per frame
