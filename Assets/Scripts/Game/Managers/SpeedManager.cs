@@ -25,8 +25,12 @@ public class SpeedManager : MonoBehaviour {
 	private const float ADD_SPEED_INTERVAL = 2.0f;
 
 
-	// Start is called before the first frame update
-	void Start() {
+    private void Awake() {
+        instance = this;
+    }
+
+    // Start is called before the first frame update
+    void Start() {
         addSpeedTimer = 0;
 
     }
