@@ -7,7 +7,7 @@ public class Car50 : NormalCar
     // Start is called before the first frame update
     void Start() {
 
-        SCORE = 20;
+        SCORE = 50;
         ChangeSpeed(3);
     }
 

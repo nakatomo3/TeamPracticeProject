@@ -16,7 +16,8 @@ public class CarGenerator : MonoBehaviour {
     };
     enum Cars {
         Car20,
-        Car50
+        Car50,
+        Car100
     }
     private List<GameObject> generateCars=new List<GameObject>();   //生成した車のpositionを参照
     private List<int> generateCarID = new List<int>();              //どの車線で生成したか番号を入れる
@@ -30,7 +31,6 @@ public class CarGenerator : MonoBehaviour {
     public GameObject[] cars;
     private bool[] hasEnemyLanes;
     private float[,] plobabiloties;
-    private float[] BASE_SPEEDs;
     
 
     // Start is called before the first frame update
@@ -48,6 +48,7 @@ public class CarGenerator : MonoBehaviour {
         for (int i=0; i < (int)Lanes.LaneMax; i++) {
             plobabiloties[i,(int)Cars.Car20] = 80.0f-i*5;
             plobabiloties[i, (int)Cars.Car50] = 70.0f - i * 5;
+            plobabiloties[i, (int)Cars.Car100] = 40.0f + i * 10;
         }
  
 
@@ -61,11 +62,40 @@ public class CarGenerator : MonoBehaviour {
             generateTimer = 0;
         }
 
-        //車ごとの生成確率を難易度に合わせて変える
+        //---------------------------車ごとの生成確率を難易度に合わせて変える---------------------------------//
         //for (int i = 0; i < (int)Lanes.LaneMax; i++) {
         //    plobabiloties[i, (int)Cars.Car20] = -15 *SystemManager.instance.GetDifficultyRank() + 80-i*5;
         //     plobabiloties[i, (int)Cars.Car50] = -8 * ((SystemManager.instance.GetDifficultyRank() - 1)*(SystemManager.instance.GetDifficultyRank() - 1)) + 80)-i*5;
 
+
+        //if (SystemManager.instance.GetDifficultyRank() > 10) {
+        //    plobabiloties[(int)Lanes.Lane4, (int)Cars.Car100] = -19.0f * (SystemManager.instance.GetDifficultyRank() - 10) * (SystemManager.instance.GetDifficultyRank() - 10) + 80;
+        //} else {
+        //    plobabiloties[(int)Lanes.Lane4, (int)Cars.Car100] = -0.5f * (SystemManager.instance.GetDifficultyRank() - 10) * (SystemManager.instance.GetDifficultyRank() - 10) + 80;
+        //}
+
+        //if (SystemManager.instance.GetDifficultyRank() > 8) {
+        //    plobabiloties[(int)Lanes.Lane4, (int)Cars.Car100] = -4.0f * (SystemManager.instance.GetDifficultyRank() - 8) * (SystemManager.instance.GetDifficultyRank() - 8) + 80;
+        //} else {
+        //    plobabiloties[(int)Lanes.Lane4, (int)Cars.Car100] = -0.6f * (SystemManager.instance.GetDifficultyRank() - 8) * (SystemManager.instance.GetDifficultyRank() - 8) + 80;
+        //}
+
+        //if (SystemManager.instance.GetDifficultyRank() > 5) {
+        //    plobabiloties[(int)Lanes.Lane3, (int)Cars.Car100] = -1.5f * (SystemManager.instance.GetDifficultyRank() - 2) * (SystemManager.instance.GetDifficultyRank() - 2) + 80;
+        //} else {
+        //    plobabiloties[(int)Lanes.Lane3, (int)Cars.Car100] = -0.6f * (SystemManager.instance.GetDifficultyRank() - 4) * (SystemManager.instance.GetDifficultyRank() - 4) + 80;
+        //}
+
+        //if (SystemManager.instance.GetDifficultyRank() > 2) {
+        //    plobabiloties[(int)Lanes.Lane4, (int)Cars.Car100] = -0.9f * (SystemManager.instance.GetDifficultyRank() - 2) * (SystemManager.instance.GetDifficultyRank() - 2) + 80;
+        //} else {
+        //    plobabiloties[(int)Lanes.Lane4, (int)Cars.Car100] = -2.0f * (SystemManager.instance.GetDifficultyRank() - 2) * (SystemManager.instance.GetDifficultyRank() - 2) + 80;
+        //}
+
+        //if (SystemManager.instance.GetDifficultyRank() > 11) {
+        //    for (int i = 0; i < (int)Lanes.LaneMax; i++) {
+        //        plobabiloties[i, (int)Cars.Car100] = 30 / SystemManager.instance.GetDifficultyRank();
+        //    }
         //}
 
         //生成した車がどの位置にあるか調べてhasEnemyLanesをtrueにしたりfalseにする
