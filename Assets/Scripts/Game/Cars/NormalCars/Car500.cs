@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Car500 : MonoBehaviour
-{
+public class Car500 : NormalCar {
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start() {
+
+        SCORE = 500;
+        ChangeSpeed(3.5f);
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() {
+        AutoDestroy();
+        MoveVertical();
     }
 }
