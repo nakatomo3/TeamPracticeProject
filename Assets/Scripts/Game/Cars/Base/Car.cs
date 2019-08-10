@@ -15,8 +15,7 @@ public class Car : MonoBehaviour {
 	protected int SCORE;
 
 	// Start is called before the first frame update
-	virtual protected void Start() {
-        ChangeSpeed(SpeedManager.instance.GetSpeed());
+	void Start() {
 	}
 
 	// Update is called once per frame
